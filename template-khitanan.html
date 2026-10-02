@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Undangan Syukuran Khitan - Muhammad Farhan Al-Ghifari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --primary: #2d6a4f;
+    --secondary: #fff;
+    --accent: #40916c;
+    --gold: #d4a017;
+    --light: #f0fdf4;
+    --dark: #1b4332;
+    --text: #2d3748;
+    --shadow: 0 4px 24px rgba(45,106,79,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light);
+    color: var(--text);
+    overflow-x: hidden;
+    max-width: 480px;
+    margin: 0 auto;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(45,106,79,0.04) 0px, rgba(45,106,79,0.04) 1px, transparent 1px, transparent 12px),
+      repeating-linear-gradient(-45deg, rgba(45,106,79,0.04) 0px, rgba(45,106,79,0.04) 1px, transparent 1px, transparent 12px);
+    background-size: 24px 24px;
+  }
+
+  /* ── SCROLL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 40px 20px;
+  }
+
+  .section-title {
+    font-family: 'Amiri', serif;
+    font-size: 1.6rem;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 auto 28px;
+    width: fit-content;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    width: 48px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+  .section-divider::after {
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .section-divider span {
+    color: var(--gold);
+    font-size: 1.2rem;
+  }
+
+  /* ══════════════════════════════════
+     1. HERO / COVER
+  ══════════════════════════════════ */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--dark) 0%, var(--primary) 45%, var(--accent) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Geometric border */
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 1.5px solid rgba(212,160,23,0.35);
+    pointer-events: none;
+    z-index: 1;
+  }
+  #hero::after {
+    content: '';
+    position: absolute;
+    inset: 22px;
+    border: 0.5px solid rgba(212,160,23,0.18);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Islamic geo background inside hero */
+  .hero-geo {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(45deg, rgba(212,160,23,0.04) 0px, rgba(212,160,23,0.04) 1px, transparent 1px, transparent 16px);
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  /* Crescent + Star */
+  .crescent-wrapper {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 4px;
+  }
+  .crescent {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: -14px 4px 0 4px var(--primary);
+    position: absolute;
+    top: 4px;
+    left: 0;
+  }
+  .star {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    width: 0;
+    height: 0;
+    color: var(--gold);
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+  .star::before {
+    content: '★';
+    color: var(--gold);
+    text-shadow: 0 0 8px rgba(212,160,23,0.7);
+  }
+
+  .basmallah {
+    font-family: 'Amiri', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    line-height: 1.6;
+    direction: rtl;
+  }
+
+  .salam {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.04em;
+    font-weight: 300;
+    max-width: 280px;
+    line-height: 1.6;
+  }
+
+  .hero-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .syukuran-title {
+    font-family: 'Amiri', serif;
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    line-height: 1.2;
+  }
+
+  .child-name {
+    font-family: 'Amiri', serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 3px 16px rgba(0,0,0,0.3);
+    line-height: 1.15;
+  }
+
+  .putra-label {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.08em;
+  }
+
+  .hero-guest-wrap {
+    margin-top: 8px;
+    padding: 10px 20px;
+    border: 1px solid rgba(212,160,23,0.45);
+    border-radius: 4px;
+    background: rgba(0,0,0,0.15);
+  }
+  .hero-guest-label {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .hero-guest-name {
+    font-family: 'Amiri', serif;
+    font-size: 1.3rem;
+    color: #fff;
+  }
+
+  .scroll-hint {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    animation: bounce 2s infinite;
+  }
+  .scroll-hint svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: rgba(255,255,255,0.5);
+    stroke-width: 2;
+  }
+  @keyframes bounce {
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(6px); }
+  }
+
+  /* ══════════════════════════════════
+     2. INVITATION TEXT
+  ══════════════════════════════════ */
+  #invitation {
+    background: #fff;
+    text-align: center;
+    border-top: 3px solid var(--gold);
+  }
+
+  .inv-ornament {
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .inv-text {
+    font-size: 0.82rem;
+    line-height: 1.9;
+    color: #4a5568;
+    max-width: 380px;
+    margin: 0 auto 20px;
+  }
+
+  .inv-text strong {
+    color: var(--primary);
+  }
+
+  .parents-card {
+    background: var(--light);
+    border: 1px solid rgba(45,106,79,0.15);
+    border-radius: 12px;
+    padding: 18px 24px;
+    display: inline-block;
+    text-align: center;
+  }
+  .parents-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .parents-name {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    color: var(--dark);
+    line-height: 1.7;
+  }
+  .parents-ampersand {
+    color: var(--gold);
+    font-size: 1.3rem;
+  }
+
+  /* ══════════════════════════════════
+     3. EVENT DETAILS
+  ══════════════════════════════════ */
+  #details {
+    background: linear-gradient(180deg, var(--light) 0%, #d8f3dc 100%);
+  }
+
+  .detail-cards {
+    display: grid;
+    gap: 14px;
+  }
+
+  .detail-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--gold);
+  }
+
+  .detail-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+  }
+
+  .detail-info h4 {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .detail-info p {
+    font-size: 0.88rem;
+    color: var(--dark);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .maps-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 18px;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    box-shadow: 0 4px 16px rgba(45,106,79,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .maps-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(45,106,79,0.4);
+  }
+
+  /* ══════════════════════════════════
+     4. COUNTDOWN
+  ══════════════════════════════════ */
+  #countdown {
+    background: linear-gradient(160deg, var(--dark) 0%, var(--primary) 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #countdown::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 20px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 20px);
+  }
+
+  #countdown .section-title { color: #fff; }
+  #countdown .section-divider::before { background: linear-gradient(90deg, transparent, rgba(212,160,23,0.7)); }
+  #countdown .section-divider::after { background: linear-gradient(90deg, rgba(212,160,23,0.7), transparent); }
+
+  .countdown-sub {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 28px;
+    letter-spacing: 0.08em;
+    position: relative;
+  }
+
+  .countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    position: relative;
+  }
+
+  .countdown-box {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(212,160,23,0.3);
+    border-radius: 12px;
+    padding: 14px 8px;
+    backdrop-filter: blur(4px);
+  }
+
+  .countdown-num {
+    font-family: 'Amiri', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+
+  .countdown-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-top: 4px;
+    display: block;
+  }
+
+  .countdown-done {
+    font-family: 'Amiri', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    position: relative;
+  }
+
+  /* ══════════════════════════════════
+     5. DOA SECTION
+  ══════════════════════════════════ */
+  #doa {
+    background: #fff;
+    text-align: center;
+  }
+
+  .doa-card {
+    background: linear-gradient(135deg, var(--light) 0%, #d8f3dc 100%);
+    border: 1px solid rgba(45,106,79,0.2);
+    border-radius: 16px;
+    padding: 28px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .doa-card::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: 10px;
+    font-family: 'Amiri', serif;
+    font-size: 8rem;
+    color: rgba(45,106,79,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .doa-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.25rem;
+    color: var(--dark);
+    direction: rtl;
+    line-height: 2;
+    margin-bottom: 18px;
+  }
+
+  .doa-source {
+    font-size: 0.65rem;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .doa-divider {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 14px;
+    border-radius: 2px;
+  }
+
+  .doa-translation {
+    font-size: 0.78rem;
+    color: #4a5568;
+    line-height: 1.85;
+    font-style: italic;
+  }
+
+  /* ══════════════════════════════════
+     6. GALLERY
+  ══════════════════════════════════ */
+  #gallery {
+    background: var(--light);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 2px 12px rgba(45,106,79,0.12);
+    border: 2px solid rgba(212,160,23,0.3);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .gallery-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(45,106,79,0.25);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .gallery-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, #52b788 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .gallery-placeholder span {
+    font-size: 2rem;
+    opacity: 0.6;
+  }
+  .gallery-placeholder p {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .gallery-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px,
+      transparent 1px, transparent 8px
+    );
+  }
+
+  /* Lightbox */
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  #lightbox.active { display: flex; }
+  #lightbox-img {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 8px;
+    border: 2px solid var(--gold);
+    object-fit: contain;
+  }
+  #lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  #lightbox-close:hover { opacity: 1; }
+  #lightbox-caption {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.7rem;
+    margin-top: 12px;
+    letter-spacing: 0.08em;
+  }
+  #lightbox-nav {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .lb-nav-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: background 0.2s;
+  }
+  .lb-nav-btn:hover { background: rgba(255,255,255,0.2); }
+
+  /* ══════════════════════════════════
+     7. RSVP
+  ══════════════════════════════════ */
+  #rsvp {
+    background: linear-gradient(180deg, #d8f3dc 0%, var(--light) 100%);
+  }
+
+  .rsvp-form {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px 22px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--gold);
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.82rem;
+    color: var(--text);
+    background: #fafafa;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+  .form-control:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(64,145,108,0.12);
+    background: #fff;
+  }
+
+  .form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232d6a4f' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .form-control.error { border-color: #fc8181; }
+  .form-error { font-size: 0.65rem; color: #e53e3e; margin-top: 4px; display: none; }
+  .form-error.show { display: block; }
+
+  .kehadiran-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .kehadiran-opt {
+    position: relative;
+  }
+  .kehadiran-opt input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+  }
+  .kehadiran-opt label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #fafafa;
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+  }
+  .kehadiran-opt input[type="radio"]:checked + label {
+    border-color: var(--accent);
+    background: var(--light);
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    box-shadow: 0 4px 16px rgba(45,106,79,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 8px;
+  }
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(45,106,79,0.4);
+  }
+  .btn-submit:active { transform: translateY(0); }
+
+  .rsvp-success {
+    display: none;
+    text-align: center;
+    padding: 32px 20px;
+  }
+  .rsvp-success.show { display: block; }
+  .success-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .success-title {
+    font-family: 'Amiri', serif;
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .success-msg {
+    font-size: 0.8rem;
+    color: #4a5568;
+    line-height: 1.7;
+  }
+
+  /* ══════════════════════════════════
+     8. MUSIC PLAYER (Fixed)
+  ══════════════════════════════════ */
+  #music-player {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--primary), var(--dark));
+    border: 1px solid rgba(212,160,23,0.4);
+    border-radius: 50px;
+    padding: 10px 16px 10px 12px;
+    box-shadow: 0 4px 20px rgba(27,67,50,0.45);
+    cursor: pointer;
+    transition: transform 0.2s;
+    user-select: none;
+  }
+  #music-player:hover { transform: scale(1.04); }
+
+  .music-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(212,160,23,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  #music-player.playing .music-icon { background: rgba(212,160,23,0.4); }
+  .music-icon svg {
+    width: 16px; height: 16px;
+    fill: var(--gold);
+    flex-shrink: 0;
+  }
+  .music-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 16px;
+  }
+  .music-bar {
+    width: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+    animation: none;
+    height: 4px;
+    transition: height 0.3s;
+  }
+  #music-player.playing .music-bar:nth-child(1) { animation: bar1 0.7s infinite; }
+  #music-player.playing .music-bar:nth-child(2) { animation: bar2 0.9s infinite; }
+  #music-player.playing .music-bar:nth-child(3) { animation: bar3 0.6s infinite; }
+  #music-player.playing .music-bar:nth-child(4) { animation: bar4 0.8s infinite; }
+  @keyframes bar1 { 0%,100%{ height:4px; } 50%{ height:14px; } }
+  @keyframes bar2 { 0%,100%{ height:10px; } 50%{ height:4px; } }
+  @keyframes bar3 { 0%,100%{ height:7px; } 50%{ height:14px; } }
+  @keyframes bar4 { 0%,100%{ height:12px; } 50%{ height:5px; } }
+
+  .music-label {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+  }
+  .music-sublabel {
+    display: block;
+    font-size: 0.55rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  /* ══════════════════════════════════
+     9. SHARE
+  ══════════════════════════════════ */
+  #share {
+    background: #fff;
+    text-align: center;
+  }
+
+  .share-desc {
+    font-size: 0.78rem;
+    color: #4a5568;
+    margin-bottom: 22px;
+    line-height: 1.7;
+  }
+
+  .share-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .share-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+  .btn-copy {
+    background: var(--light);
+    color: var(--primary);
+    border: 1.5px solid rgba(45,106,79,0.25);
+  }
+  .btn-wa {
+    background: #25d366;
+    color: #fff;
+  }
+
+  .copy-toast {
+    position: fixed;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--dark);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.72rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 600;
+    white-space: nowrap;
+  }
+  .copy-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ══════════════════════════════════
+     10. FOOTER
+  ══════════════════════════════════ */
+  #footer {
+    background: linear-gradient(180deg, var(--dark) 0%, #0d2818 100%);
+    padding: 48px 20px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Mosque silhouette via clip-path */
+  .mosque-silhouette {
+    width: 100%;
+    height: 80px;
+    position: relative;
+    margin-bottom: 24px;
+  }
+  .mosque-body {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 50px;
+    background: rgba(212,160,23,0.18);
+    border-radius: 4px 4px 0 0;
+  }
+  /* Main dome */
+  .mosque-dome {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 44px;
+    background: rgba(212,160,23,0.18);
+    border-radius: 50% 50% 0 0;
+  }
+  /* Side domes */
+  .mosque-dome-l {
+    position: absolute;
+    bottom: 50px;
+    left: calc(50% - 72px);
+    width: 44px;
+    height: 28px;
+    background: rgba(212,160,23,0.12);
+    border-radius: 50% 50% 0 0;
+  }
+  .mosque-dome-r {
+    position: absolute;
+    bottom: 50px;
+    left: calc(50% + 28px);
+    width: 44px;
+    height: 28px;
+    background: rgba(212,160,23,0.12);
+    border-radius: 50% 50% 0 0;
+  }
+  /* Minaret left */
+  .mosque-minaret-l {
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 80px);
+    width: 14px;
+    height: 80px;
+    background: rgba(212,160,23,0.15);
+    border-radius: 2px;
+  }
+  .mosque-minaret-l::after {
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: rgba(212,160,23,0.2);
+    border-radius: 50% 50% 0 0;
+  }
+  /* Minaret right */
+  .mosque-minaret-r {
+    position: absolute;
+    bottom: 0;
+    right: calc(50% - 80px);
+    width: 14px;
+    height: 80px;
+    background: rgba(212,160,23,0.15);
+    border-radius: 2px;
+  }
+  .mosque-minaret-r::after {
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: rgba(212,160,23,0.2);
+    border-radius: 50% 50% 0 0;
+  }
+  /* Center door */
+  .mosque-door {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 30px;
+    background: rgba(212,160,23,0.22);
+    border-radius: 50% 50% 0 0;
+  }
+  /* Windows */
+  .mosque-win-l, .mosque-win-r {
+    position: absolute;
+    bottom: 16px;
+    width: 14px;
+    height: 18px;
+    background: rgba(212,160,23,0.15);
+    border-radius: 50% 50% 0 0;
+  }
+  .mosque-win-l { left: calc(50% - 40px); }
+  .mosque-win-r { left: calc(50% + 26px); }
+
+  .footer-jazak {
+    font-family: 'Amiri', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    margin-bottom: 8px;
+  }
+  .footer-jazak-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    color: rgba(212,160,23,0.7);
+    direction: rtl;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .footer-divider {
+    width: 60px;
+    height: 1px;
+    background: rgba(212,160,23,0.3);
+    margin: 16px auto;
+  }
+  .footer-credit {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+  }
+  .footer-credit strong {
+    color: rgba(212,160,23,0.7);
+  }
+
+  /* ══════════════════════════════════
+     RESPONSIVE (already mobile-first, cap on desktop)
+  ══════════════════════════════════ */
+  @media (min-width: 481px) {
+    body {
+      box-shadow: 0 0 80px rgba(0,0,0,0.12);
+    }
+    #music-player {
+      right: calc(50% - 220px);
+    }
+    .copy-toast {
+      left: 50%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════ HERO ════════════════════════════ -->
+<section id="hero">
+  <div class="hero-geo"></div>
+  <div class="hero-content">
+    <div class="crescent-wrapper">
+      <div class="crescent"></div>
+      <div class="star"></div>
+    </div>
+
+    <p class="basmallah">بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ</p>
+
+    <p class="salam">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
+
+    <span class="hero-label">Mengundang Kehadiran</span>
+
+    <div class="hero-guest-wrap">
+      <span class="hero-guest-label">Kepada Yth.</span>
+      <div class="hero-guest-name" id="hero-tamu">Bapak/Ibu/Saudara/i</div>
+    </div>
+
+    <span class="hero-label" style="margin-top:8px;">dalam acara</span>
+
+    <h1 class="syukuran-title">Syukuran Khitan</h1>
+
+    <div class="child-name">Muhammad Farhan<br/>Al-Ghifari</div>
+
+    <p class="putra-label">Putra dari Keluarga Al-Rasyid</p>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll ke bawah</span>
+    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ════════════════════════════ INVITATION ════════════════════════════ -->
+<section id="invitation">
+  <span class="inv-ornament">☽ ✦ ☽</span>
+  <h2 class="section-title reveal">Undangan</h2>
+  <div class="section-divider reveal"><span>✦</span></div>
+
+  <p class="inv-text reveal">
+    Dengan memohon ridho <strong>Allah SWT</strong>, kami mengundang<br/>
+    <strong>Bapak/Ibu/Saudara/i <span id="inv-tamu">…</span></strong><br/>
+    untuk menghadiri acara <strong>Syukuran Khitan</strong> putra kami.
+    <br/><br/>
+    Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+    Bapak/Ibu/Saudara/i berkenan hadir dan mendoakan.
+  </p>
+
+  <div class="parents-card reveal">
+    <p class="parents-label">Diselenggarakan Oleh</p>
+    <p class="parents-name">
+      Bpk. Harun Al-Rasyid<br/>
+      <span class="parents-ampersand">&amp;</span><br/>
+      Ibu Fatimah Zahra
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════ DETAILS ════════════════════════════ -->
+<section id="details">
+  <h2 class="section-title reveal">Detail Acara</h2>
+  <div class="section-divider reveal"><span>✦</span></div>
+
+  <div class="detail-cards">
+    <div class="detail-card reveal">
+      <div class="detail-icon">📅</div>
+      <div class="detail-info">
+        <h4>Tanggal</h4>
+        <p>Ahad, 6 Juli 2025</p>
+      </div>
+    </div>
+
+    <div class="detail-card reveal">
+      <div class="detail-icon">🕗</div>
+      <div class="detail-info">
+        <h4>Waktu</h4>
+        <p>08.00 WIB s/d Selesai</p>
+      </div>
+    </div>
+
+    <div class="detail-card reveal">
+      <div class="detail-icon">📍</div>
+      <div class="detail-info">
+        <h4>Tempat</h4>
+        <p>Kediaman Keluarga Al-Rasyid<br/>Jl. Pesantren No. 7, Bogor</p>
+      </div>
+    </div>
+
+    <div class="detail-card reveal">
+      <div class="detail-icon">👘</div>
+      <div class="detail-info">
+        <h4>Dresscode</h4>
+        <p>Islami / Batik</p>
+      </div>
+    </div>
+  </div>
+
+  <a
+    href="https://maps.google.com/?q=Jl.+Pesantren+No.7+Bogor"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="maps-btn reveal"
+  >
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Buka Google Maps
+  </a>
+</section>
+
+<!-- ════════════════════════════ COUNTDOWN ════════════════════════════ -->
+<section id="countdown">
+  <h2 class="section-title reveal">Menuju Hari Bahagia</h2>
+  <div class="section-divider reveal"><span>✦</span></div>
+  <p class="countdown-sub reveal">Ahad, 6 Juli 2025 · 08.00 WIB</p>
+
+  <div class="countdown-grid reveal" id="countdown-grid">
+    <div class="countdown-box">
+      <span class="countdown-num" id="cd-hari">00</span>
+      <span class="countdown-label">Hari</span>
+    </div>
+    <div class="countdown-box">
+      <span class="countdown-num" id="cd-jam">00</span>
+      <span class="countdown-label">Jam</span>
+    </div>
+    <div class="countdown-box">
+      <span class="countdown-num" id="cd-menit">00</span>
+      <span class="countdown-label">Menit</span>
+    </div>
+    <div class="countdown-box">
+      <span class="countdown-num" id="cd-detik">00</span>
+      <span class="countdown-label">Detik</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ DOA ════════════════════════════ -->
+<section id="doa">
+  <h2 class="section-title reveal">Dalil Khitan</h2>
+  <div class="section-divider reveal"><span>✦</span></div>
+
+  <div class="doa-card reveal">
+    <p class="doa-arabic">
+      اَلْفِطْرَةُ خَمْسٌ: اَلْخِتَانُ وَالاسْتِحْدَادُ وَقَصُّ الشَّارِبِ وَتَقْلِيمُ الأَظْفَارِ وَنَتْفُ الإِبِطِ
+    </p>
+    <span class="doa-source">HR. Bukhari (no. 5891) dan Muslim (no. 257)</span>
+    <div class="doa-divider"></div>
+    <p class="doa-translation">
+      "Fitrah itu ada lima: <strong>khitan</strong>, mencukur bulu kemaluan,
+      memendekkan kumis, memotong kuku, dan mencabut bulu ketiak."
+      <br/><br/>
+      Hadits ini menunjukkan bahwa khitan adalah bagian dari fitrah manusia
+      yang disyariatkan Islam sebagai bentuk kesucian dan ketundukan kepada Allah SWT.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════ GALLERY ════════════════════════════ -->
+<section id="gallery">
+  <h2 class="section-title reveal">Galeri</h2>
+  <div class="section-divider reveal"><span>✦</span></div>
+
+  <div class="gallery-grid reveal">
+    <div class="gallery-item" data-index="0" onclick="openLightbox(0)">
+      <div class="gallery-placeholder">
+        <span>🌿</span>
+        <p>Foto 1</p>
+      </div>
+    </div>
+    <div class="gallery-item" data-index="1" onclick="openLightbox(1)">
+      <div class="gallery-placeholder">
+        <span>☪️</span>
+        <p>Foto 2</p>
+      </div>
+    </div>
+    <div class="gallery-item" data-index="2" onclick="openLightbox(2)">
+      <div class="gallery-placeholder">
+        <span>✨</span>
+        <p>Foto 3</p>
+      </div>
+    </div>
+    <div class="gallery-item" data-index="3" onclick="openLightbox(3)">
+      <div class="gallery-placeholder">
+        <span>🌙</span>
+        <p>Foto 4</p>
+      </div>
+    </div>
+    <div class="gallery-item" data-index="4" onclick="openLightbox(4)">
+      <div class="gallery-placeholder">
+        <span>🕌</span>
+        <p>Foto 5</p>
+      </div>
+    </div>
+    <div class="gallery-item" data-index="5" onclick="openLightbox(5)">
+      <div class="gallery-placeholder">
+        <span>📿</span>
+        <p>Foto 6</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" role="dialog" aria-modal="true">
+  <button id="lightbox-close" onclick="closeLightbox()" aria-label="Tutup">&times;</button>
+  <img id="lightbox-img" src="" alt="Galeri foto"/>
+  <p id="lightbox-caption"></p>
+  <div id="lightbox-nav">
+    <button class="lb-nav-btn" onclick="lbNav(-1)">&#8592; Prev</button>
+    <button class="lb-nav-btn" onclick="lbNav(1)">Next &#8594;</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════ RSVP ════════════════════════════ -->
+<section id="rsvp">
+  <h2 class="section-title reveal">RSVP &amp; Ucapan</h2>
+  <div class="section-divider reveal"><span>✦</span></div>
+
+  <div class="rsvp-form reveal">
+    <div id="rsvp-form-wrap">
+      <form id="rsvp-form" onsubmit="submitRSVP(event)" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="r-nama">Nama Lengkap <span style="color:#e53e3e">*</span></label>
+          <input
+            type="text"
+            id="r-nama"
+            class="form-control"
+            placeholder="Masukkan nama lengkap Anda"
+            autocomplete="name"
+          />
+          <p class="form-error" id="err-nama">Nama wajib diisi.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="r-jumlah">Jumlah Tamu</label>
+          <select id="r-jumlah" class="form-control form-select">
+            <option value="1">1 orang</option>
+            <option value="2">2 orang</option>
+            <option value="3">3 orang</option>
+            <option value="4">4 orang</option>
+            <option value="5">5 orang</option>
+            <option value="6+">6 orang atau lebih</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Konfirmasi Kehadiran</label>
+          <div class="kehadiran-group">
+            <div class="kehadiran-opt">
+              <input type="radio" name="kehadiran" id="k-hadir" value="Hadir" checked/>
+              <label for="k-hadir">✅ Hadir</label>
+            </div>
+            <div class="kehadiran-opt">
+              <input type="radio" name="kehadiran" id="k-tidak" value="Tidak Hadir"/>
+              <label for="k-tidak">❌ Tidak Hadir</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="r-pesan">Pesan &amp; Doa</label>
+          <textarea
+            id="r-pesan"
+            class="form-control"
+            rows="4"
+            placeholder="Tuliskan ucapan dan doa untuk keluarga Al-Rasyid..."
+            style="resize:vertical; min-height:90px;"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          Kirim Konfirmasi 💌
+        </button>
+      </form>
+    </div>
+
+    <div class="rsvp-success" id="rsvp-success">
+      <span class="success-icon">🤲</span>
+      <h3 class="success-title">Alhamdulillah!</h3>
+      <p class="success-msg">
+        Terima kasih, <strong id="success-nama"></strong>.<br/>
+        Konfirmasi kehadiran Anda telah kami terima.<br/>
+        Jazakumullahu khairan atas doa dan ucapannya.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ SHARE ════════════════════════════ -->
+<section id="share">
+  <h2 class="section-title reveal">Bagikan Undangan</h2>
+  <div class="section-divider reveal"><span>✦</span></div>
+  <p class="share-desc reveal">
+    Sampaikan undangan ini kepada keluarga dan sahabat yang berhak hadir.<br/>
+    Semoga menjadi amal jariyah bagi kita semua.
+  </p>
+  <div class="share-buttons reveal">
+    <button class="share-btn btn-copy" onclick="copyLink()">
+      🔗 Salin Link
+    </button>
+    <button class="share-btn btn-wa" onclick="shareWA()">
+      📲 WhatsApp
+    </button>
+  </div>
+</section>
+
+<!-- ════════════════════════════ FOOTER ════════════════════════════ -->
+<footer id="footer">
+  <div class="mosque-silhouette">
+    <div class="mosque-minaret-l"></div>
+    <div class="mosque-minaret-r"></div>
+    <div class="mosque-dome-l"></div>
+    <div class="mosque-dome-r"></div>
+    <div class="mosque-dome"></div>
+    <div class="mosque-body"></div>
+    <div class="mosque-door"></div>
+    <div class="mosque-win-l"></div>
+    <div class="mosque-win-r"></div>
+  </div>
+
+  <p class="footer-jazak">Jazakumullahu Khairan</p>
+  <span class="footer-jazak-arabic">جَزَاكُمُ اللَّهُ خَيْرًا</span>
+
+  <div class="footer-divider"></div>
+
+  <p class="footer-credit">
+    Dibuat oleh <strong>Sikobokan</strong><br/>
+    &copy; 2025 · Semua hak dilindungi
+  </p>
+</footer>
+
+<!-- ════════════════════════════ MUSIC PLAYER ════════════════════════════ -->
+<div id="music-player" onclick="toggleMusic()" title="Murottal">
+  <div class="music-icon">
+    <svg id="music-play-icon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+  </div>
+  <div>
+    <div class="music-label">Murottal</div>
+    <div class="music-bars" id="music-bars">
+      <div class="music-bar"></div>
+      <div class="music-bar"></div>
+      <div class="music-bar"></div>
+      <div class="music-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Copy Toast -->
+<div class="copy-toast" id="copy-toast">✅ Link berhasil disalin!</div>
+
+<!-- Audio -->
+<audio id="bg-audio" loop preload="none">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg"/>
+</audio>
+
+<script>
+  // ── URL PARAM ──
+  (function(){
+    const params = new URLSearchParams(window.location.search);
+    const tamu = params.get('tamu') || '';
+    const display = tamu ? tamu : 'Bapak/Ibu/Saudara/i';
+    const displayInv = tamu ? tamu : '...';
+    document.getElementById('hero-tamu').textContent = display;
+    document.getElementById('inv-tamu').textContent = displayInv;
+  })();
+
+  // ── SCROLL REVEAL ──
+  (function(){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  })();
+
+  // ── COUNTDOWN ──
+  (function(){
+    const target = new Date('2027-07-06T08:00:00').getTime();
+    const elH  = document.getElementById('cd-hari');
+    const elJ  = document.getElementById('cd-jam');
+    const elM  = document.getElementById('cd-menit');
+    const elD  = document.getElementById('cd-detik');
+    const grid = document.getElementById('countdown-grid');
+
+    function pad(n){ return String(n).padStart(2,'0'); }
+
+    function tick(){
+      const diff = target - Date.now();
+      if(diff <= 0){
+        grid.innerHTML = '<p class="countdown-done" style="grid-column:1/-1">Alhamdulillah, hari ini adalah hari yang bahagia! 🎉</p>';
+        return;
+      }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      elH.textContent = pad(d);
+      elJ.textContent = pad(h);
+      elM.textContent = pad(m);
+      elD.textContent = pad(s);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // ── GALLERY LIGHTBOX ──
+  const galleryItems = [
+    { label: 'Foto 1 · Syukuran Khitan' },
+    { label: 'Foto 2 · Syukuran Khitan' },
+    { label: 'Foto 3 · Syukuran Khitan' },
+    { label: 'Foto 4 · Syukuran Khitan' },
+    { label: 'Foto 5 · Syukuran Khitan' },
+    { label: 'Foto 6 · Syukuran Khitan' },
+  ];
+  let currentLbIndex = 0;
+
+  function openLightbox(idx){
+    currentLbIndex = idx;
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    const cap = document.getElementById('lightbox-caption');
+    // For placeholders, show a generated gradient SVG as data URI
+    const colors = ['#2d6a4f,#40916c','#1b4332,#52b788','#40916c,#74c69d',
+                    '#2d6a4f,#d4a017','#1b4332,#40916c','#0d2818,#2d6a4f'];
+    const [c1,c2] = colors[idx].split(',');
+    const svgStr = `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'>
+      <defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'>
+        <stop offset='0%' stop-color='${c1}'/>
+        <stop offset='100%' stop-color='${c2}'/>
+      </linearGradient></defs>
+      <rect width='400' height='400' fill='url(%23g)'/>
+      <text x='200' y='190' font-family='serif' font-size='72' fill='rgba(255,255,255,0.3)' text-anchor='middle'>☪</text>
+      <text x='200' y='260' font-family='sans-serif' font-size='18' fill='rgba(255,255,255,0.5)' text-anchor='middle'>Foto ${idx+1}</text>
+    </svg>`;
+    img.src = 'data:image/svg+xml;charset=utf-8,' + svgStr;
+    cap.textContent = galleryItems[idx].label;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(){
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function lbNav(dir){
+    currentLbIndex = (currentLbIndex + dir + galleryItems.length) % galleryItems.length;
+    openLightbox(currentLbIndex);
+  }
+
+  document.getElementById('lightbox').addEventListener('click', function(e){
+    if(e.target === this) closeLightbox();
+  });
+
+  document.addEventListener('keydown', function(e){
+    const lb = document.getElementById('lightbox');
+    if(!lb.classList.contains('active')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowLeft') lbNav(-1);
+    if(e.key === 'ArrowRight') lbNav(1);
+  });
+
+  // ── RSVP ──
+  function submitRSVP(e){
+    e.preventDefault();
+    const nama    = document.getElementById('r-nama').value.trim();
+    const jumlah  = document.getElementById('r-jumlah').value;
+    const kehadiran = document.querySelector('input[name="kehadiran"]:checked').value;
+    const pesan   = document.getElementById('r-pesan').value.trim();
+    const errNama = document.getElementById('err-nama');
+
+    let valid = true;
+    if(!nama){
+      document.getElementById('r-nama').classList.add('error');
+      errNama.classList.add('show');
+      valid = false;
+    } else {
+      document.getElementById('r-nama').classList.remove('error');
+      errNama.classList.remove('show');
+    }
+    if(!valid) return;
+
+    const entry = {
+      id: 'rsvp_' + Date.now(),
+      template: 'khitanan',
+      nama,
+      jumlah_tamu: jumlah,
+      kehadiran,
+      pesan,
+      timestamp: new Date().toISOString()
+    };
+
+    const stored = JSON.parse(localStorage.getItem('undangan_rsvp_khitanan') || '[]');
+    stored.push(entry);
+    localStorage.setItem('undangan_rsvp_khitanan', JSON.stringify(stored));
+
+    document.getElementById('success-nama').textContent = nama;
+    document.getElementById('rsvp-form-wrap').style.display = 'none';
+    document.getElementById('rsvp-success').classList.add('show');
+  }
+
+  // ── MUSIC TOGGLE ──
+  const audio  = document.getElementById('bg-audio');
+  const player = document.getElementById('music-player');
+  const playIcon = document.getElementById('music-play-icon');
+  let isPlaying = false;
+
+  function toggleMusic(){
+    if(isPlaying){
+      audio.pause();
+      player.classList.remove('playing');
+      playIcon.innerHTML = '<polygon points="5,3 19,12 5,21"/>';
+      isPlaying = false;
+    } else {
+      audio.play().then(() => {
+        player.classList.add('playing');
+        playIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+        isPlaying = true;
+      }).catch(() => {});
+    }
+  }
+
+  // ── SHARE ──
+  function getShareURL(){
+    return window.location.href;
+  }
+
+  function copyLink(){
+    const url = getShareURL();
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(showCopyToast);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showCopyToast();
+    }
+  }
+
+  function showCopyToast(){
+    const toast = document.getElementById('copy-toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  function shareWA(){
+    const tamu = new URLSearchParams(window.location.search).get('tamu') || '';
+    const msg = `Assalamu'alaikum 🌿\n\nKami mengundang ${tamu || 'Bapak/Ibu/Saudara/i'} untuk hadir di:\n\n*Syukuran Khitan*\n*Muhammad Farhan Al-Ghifari*\n\n📅 Ahad, 6 Juli 2025\n🕗 08.00 WIB s/d Selesai\n📍 Jl. Pesantren No. 7, Bogor\n\n🔗 Detail undangan:\n${getShareURL()}\n\nJazakumullahu khairan 🤲`;
+    window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+  }
+</script>
+</body>
+</html>

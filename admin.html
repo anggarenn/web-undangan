@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard – Sikobokan</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sidebar-w: 240px;
+      --sidebar-bg: #1a1f2e;
+      --sidebar-accent: #4f6ef7;
+      --sidebar-text: #a8b2d8;
+      --sidebar-text-active: #ffffff;
+      --content-bg: #f4f6fb;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --radius: 10px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--content-bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    /* ===== LOGIN ===== */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a1f2e 0%, #2d3561 100%);
+    }
+
+    .login-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    .login-logo {
+      width: 64px;
+      height: 64px;
+      background: var(--sidebar-accent);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 28px;
+    }
+
+    .login-box h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .login-box p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 16px;
+    }
+
+    .login-box input:focus { border-color: var(--sidebar-accent); }
+
+    .login-box button {
+      width: 100%;
+      padding: 13px;
+      background: var(--sidebar-accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .login-box button:hover { opacity: 0.9; }
+
+    .login-error {
+      color: var(--danger);
+      font-size: 13px;
+      margin-top: 12px;
+      min-height: 18px;
+    }
+
+    /* ===== LAYOUT ===== */
+    #app { display: none; min-height: 100vh; }
+
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      background: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    .sidebar-brand {
+      padding: 24px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--sidebar-accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .brand-text { color: #fff; font-weight: 700; font-size: 15px; line-height: 1.2; }
+    .brand-sub { color: var(--sidebar-text); font-size: 11px; font-weight: 400; }
+
+    .sidebar-nav { padding: 16px 12px; flex: 1; }
+
+    .nav-label {
+      color: rgba(168,178,216,0.5);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 8px 8px 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: var(--sidebar-text);
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-bottom: 2px;
+    }
+
+    .nav-item.active, .nav-item:hover {
+      background: rgba(79,110,247,0.15);
+      color: var(--sidebar-text-active);
+    }
+
+    .nav-item.active { background: rgba(79,110,247,0.25); }
+
+    .sidebar-footer {
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      color: var(--sidebar-text);
+      font-size: 12px;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main {
+      margin-left: var(--sidebar-w);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar h2 { font-size: 18px; font-weight: 700; }
+    .topbar-meta { color: var(--text-secondary); font-size: 13px; }
+
+    .topbar-actions { display: flex; gap: 10px; align-items: center; }
+
+    .btn {
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary { background: var(--sidebar-accent); color: #fff; }
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-outline { background: transparent; color: var(--text-secondary); border: 1.5px solid var(--border); }
+    .btn-outline:hover { background: var(--content-bg); }
+    .btn-danger { background: #fef2f2; color: var(--danger); border: 1.5px solid #fecaca; }
+    .btn-danger:hover { background: #fee2e2; }
+    .btn-success { background: #f0fdf4; color: #16a34a; border: 1.5px solid #bbf7d0; }
+    .btn-success:hover { background: #dcfce7; }
+
+    /* ===== CONTENT ===== */
+    .content { padding: 28px; flex: 1; }
+
+    /* ===== STATS ===== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .stat-icon.blue { background: #eff6ff; }
+    .stat-icon.green { background: #f0fdf4; }
+    .stat-icon.red { background: #fef2f2; }
+    .stat-icon.amber { background: #fffbeb; }
+
+    .stat-info { flex: 1; min-width: 0; }
+    .stat-value { font-size: 28px; font-weight: 800; line-height: 1; }
+    .stat-label { color: var(--text-secondary); font-size: 12px; margin-top: 4px; }
+
+    /* ===== TABLE PANEL ===== */
+    .panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .panel-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .panel-title { font-size: 15px; font-weight: 700; margin-right: auto; }
+
+    .filter-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    .filter-group select, .filter-group input {
+      padding: 8px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      outline: none;
+      background: #fff;
+      color: var(--text-primary);
+      transition: border-color 0.2s;
+    }
+
+    .filter-group select:focus, .filter-group input:focus {
+      border-color: var(--sidebar-accent);
+    }
+
+    .filter-group input { width: 200px; }
+
+    /* ===== TABLE ===== */
+    .table-wrap { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    thead tr { background: #f8fafc; }
+
+    th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    tbody tr:hover { background: #f8fafc; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-red { background: #fee2e2; color: #dc2626; }
+    .badge-blue { background: #dbeafe; color: #1d4ed8; }
+    .badge-amber { background: #fef3c7; color: #92400e; }
+    .badge-purple { background: #f3e8ff; color: #7e22ce; }
+
+    .pesan-cell {
+      max-width: 220px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    .time-cell { color: var(--text-secondary); font-size: 12px; white-space: nowrap; }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state {
+      padding: 60px 20px;
+      text-align: center;
+      color: var(--text-secondary);
+    }
+
+    /* CSS art: inbox envelope */
+    .empty-art {
+      width: 80px;
+      height: 60px;
+      background: #e2e8f0;
+      border-radius: 8px;
+      margin: 0 auto 20px;
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .empty-art::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 30px;
+      background: transparent;
+      border-left: 40px solid #cbd5e1;
+      border-right: 40px solid #cbd5e1;
+      border-bottom: 20px solid transparent;
+    }
+
+    .empty-art::after {
+      content: '';
+      position: absolute;
+      top: 20px; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, #cbd5e1 50%, transparent 50%),
+                  linear-gradient(-135deg, #cbd5e1 50%, transparent 50%);
+      background-size: 50% 100%;
+      background-position: 0 0, 100% 0;
+      background-repeat: no-repeat;
+    }
+
+    .empty-state h3 { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .empty-state p { font-size: 13px; margin-bottom: 20px; }
+
+    /* ===== PAGINATION INFO ===== */
+    .panel-footer {
+      padding: 14px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ===== TOAST ===== */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #1e293b;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.25s;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    #toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 700px) {
+      :root { --sidebar-w: 0px; }
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .content { padding: 16px; }
+      .topbar { padding: 14px 16px; }
+      .filter-group input { width: 140px; }
+    }
+
+    @media (max-width: 440px) {
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== LOGIN SCREEN ===== -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">🗂️</div>
+    <h1>Sikobokan Admin</h1>
+    <p>Masukkan password untuk mengakses dashboard</p>
+    <input type="password" id="pw-input" placeholder="Password..." autocomplete="current-password" />
+    <button onclick="doLogin()">Masuk</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div id="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">🗂️</div>
+      <div class="brand-text">
+        Sikobokan
+        <div class="brand-sub">Admin Panel</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-label">Menu</div>
+      <div class="nav-item active">
+        <span>📋</span> RSVP Data
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      Sikobokan &copy; 2024<br/>MVP v1.0
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <h2>Dashboard RSVP</h2>
+        <div class="topbar-meta" id="last-updated">—</div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn btn-success" onclick="loadDemo()">🎲 Demo Data</button>
+        <button class="btn btn-outline" onclick="exportCSV()">⬇️ Export CSV</button>
+        <button class="btn btn-danger" onclick="clearAll()">🗑️ Clear All</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- STATS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue">📝</div>
+          <div class="stat-info">
+            <div class="stat-value" id="s-total">0</div>
+            <div class="stat-label">Total RSVP</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon amber">👥</div>
+          <div class="stat-info">
+            <div class="stat-value" id="s-tamu">0</div>
+            <div class="stat-label">Total Tamu</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">✅</div>
+          <div class="stat-info">
+            <div class="stat-value" id="s-hadir">0</div>
+            <div class="stat-label">Hadir</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red">❌</div>
+          <div class="stat-info">
+            <div class="stat-value" id="s-tidak">0</div>
+            <div class="stat-label">Tidak Hadir</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABLE PANEL -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Data RSVP</span>
+          <div class="filter-group">
+            <select id="filter-template" onchange="renderTable()">
+              <option value="">Semua Template</option>
+              <option value="pernikahan">Pernikahan</option>
+              <option value="ultah">Ultah</option>
+              <option value="khitanan">Khitanan</option>
+            </select>
+            <input type="text" id="search-name" placeholder="🔍 Cari nama..." oninput="renderTable()" />
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table id="rsvp-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Template</th>
+                <th>Jumlah Tamu</th>
+                <th>Kehadiran</th>
+                <th>Pesan</th>
+                <th>Waktu</th>
+              </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
+
+        <div class="panel-footer">
+          <span id="row-count">0 data ditemukan</span>
+          <span id="filter-note" style="color:var(--sidebar-accent);font-size:12px;"></span>
+        </div>
+      </div>
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+  // ===== CONSTANTS =====
+  const PASSWORD = 'sikobokan2024';
+  // Keys dipakai per template
+  const LS_KEYS = [
+    'undangan_rsvp_pernikahan',
+    'undangan_rsvp_ultah',
+    'undangan_rsvp_khitanan'
+  ];
+
+  // ===== LOGIN =====
+  document.getElementById('pw-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doLogin();
+  });
+
+  function doLogin() {
+    const val = document.getElementById('pw-input').value;
+    if (val === PASSWORD) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      init();
+    } else {
+      const err = document.getElementById('login-error');
+      err.textContent = 'Password salah. Coba lagi.';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+      setTimeout(() => { err.textContent = ''; }, 3000);
+    }
+  }
+
+  // ===== DATA =====
+  // Baca dari SEMUA undangan_rsvp_* keys dan merge
+  function getData() {
+    let all = [];
+    try {
+      // Baca dari keys yang diketahui
+      LS_KEYS.forEach(function(key) {
+        const raw = localStorage.getItem(key);
+        if (raw) {
+          const arr = JSON.parse(raw);
+          if (Array.isArray(arr)) all = all.concat(arr);
+        }
+      });
+      // Juga scan semua keys lain yang match pola undangan_rsvp_*
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('undangan_rsvp_') && !LS_KEYS.includes(k)) {
+          try {
+            const arr = JSON.parse(localStorage.getItem(k) || '[]');
+            if (Array.isArray(arr)) all = all.concat(arr);
+          } catch(e) {}
+        }
+      }
+    } catch(e) {}
+    // Sort by timestamp desc
+    all.sort(function(a, b) {
+      return (b.timestamp || '') > (a.timestamp || '') ? 1 : -1;
+    });
+    return all;
+  }
+
+  // Untuk demo data: simpan ke key yang sesuai template
+  function appendToKey(key, entry) {
+    try {
+      const arr = JSON.parse(localStorage.getItem(key) || '[]');
+      arr.push(entry);
+      localStorage.setItem(key, JSON.stringify(arr));
+    } catch(e) {}
+  }
+
+  // Hapus semua data dari semua keys
+  function clearAllKeys() {
+    LS_KEYS.forEach(function(k) { localStorage.removeItem(k); });
+    // Hapus juga keys lain yang match pola
+    const extra = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith('undangan_rsvp_')) extra.push(k);
+    }
+    extra.forEach(function(k) { localStorage.removeItem(k); });
+  }
+
+  // ===== INIT =====
+  function init() {
+    refreshStats();
+    renderTable();
+    updateLastUpdated();
+  }
+
+  // ===== STATS =====
+  function refreshStats() {
+    const data = getData();
+    const total = data.length;
+    const tamu = data.reduce((s, r) => s + (parseInt(r.jumlah_tamu) || 0), 0);
+    const hadir = data.filter(r => r.kehadiran === 'hadir').length;
+    const tidak = data.filter(r => r.kehadiran === 'tidak_hadir' || r.kehadiran === 'tidak hadir').length;
+
+    document.getElementById('s-total').textContent = total;
+    document.getElementById('s-tamu').textContent = tamu;
+    document.getElementById('s-hadir').textContent = hadir;
+    document.getElementById('s-tidak').textContent = tidak;
+  }
+
+  // ===== TABLE =====
+  function renderTable() {
+    const data = getData();
+    const templateFilter = document.getElementById('filter-template').value.toLowerCase();
+    const nameSearch = document.getElementById('search-name').value.toLowerCase().trim();
+
+    let filtered = data.filter(r => {
+      const matchT = !templateFilter || (r.template || '').toLowerCase() === templateFilter;
+      const matchN = !nameSearch || (r.nama || '').toLowerCase().includes(nameSearch);
+      return matchT && matchN;
+    });
+
+    const tbody = document.getElementById('table-body');
+    const isFiltered = templateFilter || nameSearch;
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `
+        <tr><td colspan="7">
+          <div class="empty-state">
+            <div class="empty-art"></div>
+            <h3>${data.length === 0 ? 'Belum ada data RSVP' : 'Tidak ada data yang cocok'}</h3>
+            <p>${data.length === 0 ? 'Klik tombol "Demo Data" untuk memuat data contoh.' : 'Coba ubah filter atau kata kunci pencarian.'}</p>
+            ${data.length === 0 ? '<button class="btn btn-primary" onclick="loadDemo()">🎲 Muat Demo Data</button>' : ''}
+          </div>
+        </td></tr>`;
+      document.getElementById('row-count').textContent = '0 data ditemukan';
+      document.getElementById('filter-note').textContent = '';
+      refreshStats();
+      return;
+    }
+
+    tbody.innerHTML = filtered.map((r, i) => {
+      const kehadiran = r.kehadiran === 'hadir'
+        ? '<span class="badge badge-green">✅ Hadir</span>'
+        : '<span class="badge badge-red">❌ Tidak Hadir</span>';
+
+      const templateBadge = templateBadgeHtml(r.template);
+      const waktu = r.timestamp ? formatTime(r.timestamp) : '—';
+      const pesan = r.pesan ? escHtml(r.pesan) : '<span style="color:#cbd5e1">—</span>';
+
+      return `
+        <tr>
+          <td style="color:var(--text-secondary);font-size:12px">${i + 1}</td>
+          <td><strong>${escHtml(r.nama || '—')}</strong></td>
+          <td>${templateBadge}</td>
+          <td style="text-align:center;font-weight:600">${r.jumlah_tamu || 0}</td>
+          <td>${kehadiran}</td>
+          <td><div class="pesan-cell" title="${escHtml(r.pesan || '')}">${pesan}</div></td>
+          <td class="time-cell">${waktu}</td>
+        </tr>`;
+    }).join('');
+
+    const countText = filtered.length + ' data' + (isFiltered ? ' (difilter dari ' + data.length + ')' : '');
+    document.getElementById('row-count').textContent = countText;
+    document.getElementById('filter-note').textContent = isFiltered ? 'Filter aktif' : '';
+    refreshStats();
+  }
+
+  function templateBadgeHtml(tpl) {
+    const map = {
+      pernikahan: ['badge-blue', '💍 Pernikahan'],
+      ultah: ['badge-amber', '🎂 Ultah'],
+      khitanan: ['badge-purple', '🌙 Khitanan'],
+    };
+    const key = (tpl || '').toLowerCase();
+    if (map[key]) return `<span class="badge ${map[key][0]}">${map[key][1]}</span>`;
+    return `<span class="badge" style="background:#f1f5f9;color:#64748b">${escHtml(tpl || '—')}</span>`;
+  }
+
+  function formatTime(ts) {
+    try {
+      const d = new Date(ts);
+      if (isNaN(d)) return ts;
+      return d.toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' })
+        + ' ' + d.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+    } catch(e) { return ts; }
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function updateLastUpdated() {
+    const data = getData();
+    if (!data.length) {
+      document.getElementById('last-updated').textContent = 'Belum ada data';
+      return;
+    }
+    const latest = data.reduce((a, b) => (a.timestamp > b.timestamp ? a : b), data[0]);
+    document.getElementById('last-updated').textContent = 'Update terakhir: ' + formatTime(latest.timestamp);
+  }
+
+  // ===== EXPORT CSV =====
+  function exportCSV() {
+    const data = getData();
+    if (!data.length) { toast('Tidak ada data untuk diekspor.'); return; }
+
+    const headers = ['No','ID','Template','Nama','Jumlah Tamu','Kehadiran','Pesan','Waktu'];
+    const rows = data.map((r, i) => [
+      i + 1,
+      r.id || '',
+      r.template || '',
+      r.nama || '',
+      r.jumlah_tamu || 0,
+      r.kehadiran || '',
+      (r.pesan || '').replace(/"/g, '""'),
+      r.timestamp || ''
+    ]);
+
+    const csv = [headers, ...rows]
+      .map(row => row.map(v => `"${v}"`).join(','))
+      .join('\n');
+
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'rsvp-sikobokan-' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast('✅ CSV berhasil diunduh (' + data.length + ' data)');
+  }
+
+  // ===== CLEAR ALL =====
+  function clearAll() {
+    const data = getData();
+    if (!data.length) { toast('Tidak ada data untuk dihapus.'); return; }
+    if (!confirm('Hapus SEMUA data RSVP (' + data.length + ' entri)? Tindakan ini tidak dapat dibatalkan.')) return;
+    setData([]);
+    renderTable();
+    updateLastUpdated();
+    toast('🗑️ Semua data telah dihapus.');
+  }
+
+  // ===== DEMO DATA =====
+  function loadDemo() {
+    const existing = getData();
+    if (existing.length > 0) {
+      if (!confirm('Sudah ada ' + existing.length + ' data. Tambahkan 5 demo data di atasnya?')) return;
+    }
+
+    const samples = [
+      {
+        id: uuid(), template: 'pernikahan', nama: 'Budi Santoso',
+        jumlah_tamu: 2, kehadiran: 'hadir',
+        pesan: 'Selamat menempuh hidup baru! Semoga langgeng ya!',
+        timestamp: '2024-01-15T10:30:00'
+      },
+      {
+        id: uuid(), template: 'pernikahan', nama: 'Siti Rahayu',
+        jumlah_tamu: 4, kehadiran: 'hadir',
+        pesan: 'Doakan kami tidak bisa hadir, tapi doa selalu menyertai.',
+        timestamp: '2024-01-15T11:05:22'
+      },
+      {
+        id: uuid(), template: 'ultah', nama: 'Dian Permata',
+        jumlah_tamu: 1, kehadiran: 'tidak_hadir',
+        pesan: 'Maaf tidak bisa hadir, ada acara keluarga.',
+        timestamp: '2024-01-16T08:17:45'
+      },
+      {
+        id: uuid(), template: 'khitanan', nama: 'Agus Wijaya',
+        jumlah_tamu: 3, kehadiran: 'hadir',
+        pesan: 'Insya Allah hadir, selamat ya!',
+        timestamp: '2024-01-16T14:22:10'
+      },
+      {
+        id: uuid(), template: 'pernikahan', nama: 'Rina Kusuma',
+        jumlah_tamu: 2, kehadiran: 'hadir',
+        pesan: '',
+        timestamp: '2024-01-17T09:00:00'
+      }
+    ];
+
+    setData([...existing, ...samples]);
+    renderTable();
+    updateLastUpdated();
+    toast('🎲 5 demo data berhasil dimuat!');
+  }
+
+  function uuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = Math.random() * 16 | 0;
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+  }
+
+  // ===== TOAST =====
+  function toast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 3000);
+  }
+</script>
+</body>
+</html>

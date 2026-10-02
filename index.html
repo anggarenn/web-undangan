@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sikobokan — Web Undangan Digital</title>
+<meta name="description" content="Buat undangan digital elegan dalam hitungan menit. Fitur countdown, galeri foto, musik, RSVP, dan share link.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0b1a35;
+    --navy-light: #122344;
+    --navy-mid: #1a3260;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --gold-pale: #f5e8b8;
+    --cream: #fdf8ef;
+    --white: #ffffff;
+    --text-muted: #8899b4;
+    --radius: 16px;
+    --shadow: 0 8px 40px rgba(0,0,0,0.35);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 24px;
+    background: rgba(11,26,53,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .nav-logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.7rem;
+    color: var(--gold-light);
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy) !important;
+    padding: 9px 20px;
+    border-radius: 50px;
+    font-weight: 600 !important;
+    font-size: 0.84rem !important;
+    transition: opacity 0.2s !important;
+  }
+  .nav-cta:hover { opacity: 0.88; color: var(--navy) !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(26,50,96,0.6) 0%, transparent 60%),
+                var(--navy);
+  }
+
+  /* floating orbs */
+  #hero::before, #hero::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: orb-float 8s ease-in-out infinite;
+  }
+  #hero::before {
+    width: 400px; height: 400px;
+    background: rgba(201,168,76,0.07);
+    top: -100px; right: -80px;
+  }
+  #hero::after {
+    width: 300px; height: 300px;
+    background: rgba(26,50,96,0.5);
+    bottom: -60px; left: -60px;
+    animation-delay: -4s;
+  }
+
+  @keyframes orb-float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold-light);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 50px;
+    margin-bottom: 28px;
+    animation: fade-up 0.7s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+    animation: fade-up 0.7s 0.15s ease both;
+  }
+
+  .hero-title .gradient-text {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, #fff5c0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto 40px;
+    animation: fade-up 0.7s 0.3s ease both;
+    font-weight: 300;
+  }
+
+  .hero-btns {
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    animation: fade-up 0.7s 0.45s ease both;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 15px 34px;
+    border-radius: 50px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(201,168,76,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.5); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    font-size: 0.95rem;
+    padding: 14px 34px;
+    border-radius: 50px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+
+  /* floating envelope decoration */
+  .hero-deco {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.12;
+    font-size: 6rem;
+    animation: float-slow 6s ease-in-out infinite;
+  }
+  .hero-deco.d1 { top: 18%; left: 6%; animation-delay: 0s; }
+  .hero-deco.d2 { top: 30%; right: 7%; animation-delay: -2s; font-size: 4rem; }
+  .hero-deco.d3 { bottom: 18%; left: 12%; animation-delay: -4s; font-size: 3.5rem; }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-18px) rotate(5deg); }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* scroll indicator */
+  .scroll-hint {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--text-muted); font-size: 0.75rem; letter-spacing: 1px;
+    animation: fade-up 1s 1s ease both;
+  }
+  .scroll-hint span { display: block; width: 1px; height: 48px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scroll-line 2s ease-in-out infinite; }
+  @keyframes scroll-line { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 90px 24px; }
+  .section-label {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .section-sub {
+    text-align: center;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto 56px;
+    font-size: 0.95rem;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* ── TEMPLATES ── */
+  #templates { background: var(--navy-light); }
+
+  .templates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+  }
+
+  .template-card {
+    background: var(--navy);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.12);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .template-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  /* CSS Art Thumbnails */
+  .thumb {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Pernikahan — gold/ivory */
+  .thumb-wedding {
+    background: linear-gradient(135deg, #2c1f00 0%, #5a3d00 30%, #c9a84c 60%, #f5e8b8 100%);
+  }
+  .thumb-wedding::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 40%, rgba(245,232,184,0.35) 0%, transparent 60%);
+  }
+  .thumb-wedding::after {
+    content: '💍';
+    font-size: 3.5rem;
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -55%);
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+    animation: pulse-soft 3s ease-in-out infinite;
+  }
+  .thumb-wedding .ring-deco {
+    position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+    width: 120px; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(245,232,184,0.7), transparent);
+  }
+  .thumb-wedding .floral {
+    position: absolute;
+    font-size: 1.4rem;
+    opacity: 0.55;
+    animation: float-slow 5s ease-in-out infinite;
+  }
+  .thumb-wedding .floral.f1 { top: 10px; left: 16px; animation-delay: 0s; }
+  .thumb-wedding .floral.f2 { top: 14px; right: 18px; animation-delay: -2.5s; }
+  .thumb-wedding .floral.f3 { bottom: 20px; left: 22px; animation-delay: -1s; font-size: 1.1rem; }
+  .thumb-wedding .floral.f4 { bottom: 18px; right: 20px; animation-delay: -3.5s; font-size: 1.1rem; }
+
+  /* Ulang Tahun — pink/purple/blue */
+  .thumb-birthday {
+    background: linear-gradient(135deg, #1a0533 0%, #6b21a8 35%, #ec4899 65%, #3b82f6 100%);
+    background-size: 200% 200%;
+    animation: gradient-shift 5s ease infinite;
+  }
+  .thumb-birthday::after {
+    content: '🎂';
+    font-size: 3.5rem;
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -55%);
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+    animation: pulse-soft 2.5s ease-in-out infinite;
+  }
+  .thumb-birthday .confetti {
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0.7;
+    animation: confetti-fall 4s ease-in-out infinite;
+  }
+  .thumb-birthday .confetti.c1 { top: 8px; left: 10%; animation-delay: 0s; }
+  .thumb-birthday .confetti.c2 { top: 12px; right: 15%; animation-delay: -1s; }
+  .thumb-birthday .confetti.c3 { top: 5px; left: 40%; animation-delay: -2s; }
+  .thumb-birthday .confetti.c4 { bottom: 12px; left: 20%; animation-delay: -0.5s; }
+  .thumb-birthday .confetti.c5 { bottom: 8px; right: 25%; animation-delay: -1.5s; }
+
+  @keyframes confetti-fall {
+    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+    50% { transform: translateY(12px) rotate(180deg); opacity: 0.9; }
+  }
+
+  /* Khitanan — green/white */
+  .thumb-khitan {
+    background: linear-gradient(135deg, #022c1e 0%, #065f46 40%, #34d399 70%, #ecfdf5 100%);
+  }
+  .thumb-khitan::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 35%, rgba(236,253,245,0.2) 0%, transparent 65%);
+  }
+  .thumb-khitan::after {
+    content: '☪️';
+    font-size: 3.5rem;
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -55%);
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35));
+    animation: pulse-soft 3s ease-in-out infinite;
+  }
+  .thumb-khitan .star-deco {
+    position: absolute;
+    color: rgba(236,253,245,0.5);
+    font-size: 1.2rem;
+    animation: float-slow 4s ease-in-out infinite;
+  }
+  .thumb-khitan .star-deco.s1 { top: 12px; left: 18px; animation-delay: 0s; }
+  .thumb-khitan .star-deco.s2 { top: 10px; right: 20px; animation-delay: -1.5s; }
+  .thumb-khitan .star-deco.s3 { bottom: 16px; left: 28%; animation-delay: -3s; font-size: 1rem; }
+
+  @keyframes pulse-soft {
+    0%, 100% { transform: translate(-50%, -55%) scale(1); }
+    50% { transform: translate(-50%, -58%) scale(1.08); }
+  }
+
+  .card-badge {
+    position: absolute; top: 14px; left: 14px;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(8px);
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 50px;
+  }
+
+  .card-body { padding: 22px 24px 26px; }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+  .card-desc { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 20px; line-height: 1.55; }
+
+  .btn-demo {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold-light);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .btn-demo:hover {
+    background: linear-gradient(135deg, rgba(201,168,76,0.3), rgba(201,168,76,0.15));
+    border-color: var(--gold);
+    transform: translateY(-1px);
+  }
+
+  /* ── FEATURES ── */
+  #features { background: var(--navy); }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 22px;
+  }
+
+  .feature-card {
+    background: var(--navy-light);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    text-align: center;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .feature-card:hover { border-color: rgba(201,168,76,0.35); transform: translateY(-4px); }
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon {
+    font-size: 2.4rem;
+    margin-bottom: 14px;
+    display: block;
+    animation: float-slow 5s ease-in-out infinite;
+  }
+  .feature-card:nth-child(2) .feature-icon { animation-delay: -1s; }
+  .feature-card:nth-child(3) .feature-icon { animation-delay: -2s; }
+  .feature-card:nth-child(4) .feature-icon { animation-delay: -3s; }
+  .feature-card:nth-child(5) .feature-icon { animation-delay: -4s; }
+
+  .feature-title { font-weight: 600; font-size: 1rem; margin-bottom: 8px; }
+  .feature-desc { color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; }
+
+  /* ── PRICING ── */
+  #pricing { background: var(--navy-light); }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .price-card {
+    background: var(--navy);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: var(--radius);
+    padding: 36px 30px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .price-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(0,0,0,0.4); }
+
+  .price-card.featured {
+    border-color: var(--gold);
+    background: linear-gradient(160deg, #1a2f5a 0%, var(--navy) 100%);
+    box-shadow: 0 0 40px rgba(201,168,76,0.15);
+  }
+  .price-card.featured::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+  .popular-tag {
+    position: absolute; top: 18px; right: 18px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 50px;
+  }
+
+  .price-plan { font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .price-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .price-amount sup { font-size: 1rem; vertical-align: super; font-family: 'Inter', sans-serif; font-weight: 600; }
+  .price-period { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 28px; }
+  .price-features { list-style: none; margin-bottom: 32px; }
+  .price-features li {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--text-muted); font-size: 0.87rem;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .price-features li:last-child { border-bottom: none; }
+  .price-features li .check { color: var(--gold-light); font-size: 1rem; flex-shrink: 0; }
+  .price-features li .cross { color: #4a5568; font-size: 1rem; flex-shrink: 0; }
+  .price-features li.disabled { opacity: 0.45; }
+
+  .btn-plan {
+    display: block;
+    text-align: center;
+    padding: 13px 24px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+  }
+  .btn-plan-outline {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.35);
+    color: var(--gold-light);
+  }
+  .btn-plan-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.07); }
+  .btn-plan-gold {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+  }
+  .btn-plan-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,0.45); }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--navy); }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .testi-card {
+    background: var(--navy-light);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: var(--radius);
+    padding: 30px 26px;
+    position: relative;
+    transition: transform 0.3s;
+  }
+  .testi-card:hover { transform: translateY(-4px); }
+  .testi-card::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: rgba(201,168,76,0.15);
+    position: absolute;
+    top: 10px; left: 18px;
+    line-height: 1;
+  }
+
+  .testi-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 14px; letter-spacing: 2px; }
+  .testi-text { color: #c8d4e8; font-size: 0.9rem; line-height: 1.7; margin-bottom: 22px; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    border: 2px solid rgba(201,168,76,0.3);
+  }
+  .av1 { background: linear-gradient(135deg, #c9a84c, #f5e8b8); }
+  .av2 { background: linear-gradient(135deg, #6b21a8, #ec4899); }
+  .av3 { background: linear-gradient(135deg, #065f46, #34d399); }
+  .testi-name { font-weight: 600; font-size: 0.9rem; }
+  .testi-detail { color: var(--text-muted); font-size: 0.78rem; margin-top: 2px; }
+
+  /* ── CTA ── */
+  #cta {
+    background: linear-gradient(135deg, #0b1a35 0%, #1a2f5a 50%, #0b1a35 100%);
+    text-align: center;
+    padding: 90px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  #cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
+  }
+  #cta .section-title { position: relative; z-index: 1; }
+  #cta .section-sub { position: relative; z-index: 1; }
+
+  .wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 16px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 6px 28px rgba(37,211,102,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative; z-index: 1;
+  }
+  .wa-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(37,211,102,0.5); }
+  .wa-icon {
+    width: 26px; height: 26px;
+    background: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060f1e;
+    padding: 48px 24px 28px;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 36px;
+  }
+  .footer-brand .nav-logo { font-size: 2rem; display: block; margin-bottom: 10px; }
+  .footer-tagline { color: var(--text-muted); font-size: 0.85rem; max-width: 300px; line-height: 1.6; }
+  .footer-links h4 { color: var(--gold); font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+  .footer-links ul { list-style: none; }
+  .footer-links ul li { margin-bottom: 8px; }
+  .footer-links ul li a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links ul li a:hover { color: var(--gold-light); }
+  .footer-bottom {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 20px;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .footer-bottom p { color: #4a5568; font-size: 0.8rem; }
+  .footer-love { color: var(--gold); }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--navy-mid);
+    border-top: 1px solid rgba(201,168,76,0.12);
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    padding: 28px 24px;
+  }
+  .stats-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label { color: var(--text-muted); font-size: 0.78rem; letter-spacing: 0.5px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    nav { padding: 14px 18px; }
+    .nav-links { display: none; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .stats-inner { gap: 28px; }
+    .stat-num { font-size: 1.6rem; }
+    section { padding: 68px 18px; }
+    .hero-btns { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-outline { width: 100%; max-width: 280px; text-align: center; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+
+  /* ── SCROLL REVEAL (pure CSS) ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="nav-logo">Sikobokan</a>
+  <ul class="nav-links">
+    <li><a href="#templates">Template</a></li>
+    <li><a href="#features">Fitur</a></li>
+    <li><a href="#pricing">Harga</a></li>
+    <li><a href="#testimonials">Testimoni</a></li>
+    <li><a href="https://wa.me/6281234567890?text=Halo+Sikobokan" class="nav-cta" target="_blank" rel="noopener">Mulai Gratis</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <span class="hero-deco d1">💌</span>
+  <span class="hero-deco d2">✨</span>
+  <span class="hero-deco d3">🌹</span>
+
+  <span class="hero-badge">✦ Platform Undangan Digital #1 Indonesia</span>
+
+  <h1 class="hero-title">
+    <span class="gradient-text">Sikobokan</span><br>
+    Web Undangan Digital
+  </h1>
+
+  <p class="hero-tagline">Buat undangan digital elegan dalam hitungan menit. Tampil berkesan, mudah dibagikan, dan selalu dikenang.</p>
+
+  <div class="hero-btns">
+    <a href="#templates" class="btn-primary">Lihat Template</a>
+    <a href="https://wa.me/6281234567890?text=Halo+Sikobokan" class="btn-outline" target="_blank" rel="noopener">Konsultasi Gratis</a>
+  </div>
+
+  <div class="scroll-hint">scroll<span></span></div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num">5.000+</span>
+      <span class="stat-label">Undangan Dibuat</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">98%</span>
+      <span class="stat-label">Kepuasan Pelanggan</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">12</span>
+      <span class="stat-label">Template Tersedia</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">24/7</span>
+      <span class="stat-label">Support Aktif</span>
+    </div>
+  </div>
+</div>
+
+<!-- TEMPLATES -->
+<section id="templates">
+  <div class="container">
+    <span class="section-label">Koleksi Template</span>
+    <h2 class="section-title">Pilih Template <span style="color:var(--gold-light)">Impianmu</span></h2>
+    <p class="section-sub">Setiap template dirancang dengan penuh cinta, siap dikustomisasi sesuai momen spesialmu.</p>
+
+    <div class="templates-grid">
+
+      <!-- PERNIKAHAN -->
+      <div class="template-card reveal">
+        <div class="thumb thumb-wedding">
+          <span class="floral f1">🌸</span>
+          <span class="floral f2">🌺</span>
+          <span class="floral f3">🌷</span>
+          <span class="floral f4">🌸</span>
+          <div class="ring-deco"></div>
+        </div>
+        <span class="card-badge">Populer</span>
+        <div class="card-body">
+          <h3 class="card-title">Pernikahan</h3>
+          <p class="card-desc">Undangan pernikahan mewah dengan nuansa emas dan ivory. Elegan, romantis, dan tak terlupakan untuk hari bahagiamu.</p>
+          <a href="templates/pernikahan.html" class="btn-demo">✦ Lihat Demo</a>
+        </div>
+      </div>
+
+      <!-- ULANG TAHUN -->
+      <div class="template-card reveal reveal-delay-1">
+        <div class="thumb thumb-birthday">
+          <span class="confetti c1">🎊</span>
+          <span class="confetti c2">🎉</span>
+          <span class="confetti c3">⭐</span>
+          <span class="confetti c4">🎈</span>
+          <span class="confetti c5">🎊</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Ulang Tahun</h3>
+          <p class="card-desc">Rayakan hari istimewa dengan penuh warna dan kegembiraan. Template ceria dengan animasi yang memukau tamu undangan.</p>
+          <a href="templates/ulang-tahun.html" class="btn-demo">✦ Lihat Demo</a>
+        </div>
+      </div>
+
+      <!-- KHITANAN -->
+      <div class="template-card reveal reveal-delay-2">
+        <div class="thumb thumb-khitan">
+          <span class="star-deco s1">✦</span>
+          <span class="star-deco s2">✦</span>
+          <span class="star-deco s3">✦</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Khitanan</h3>
+          <p class="card-desc">Undangan khitanan bernuansa islami yang syahdu. Desain bersih dengan sentuhan hijau dan putih yang menenangkan.</p>
+          <a href="templates/khitanan.html" class="btn-demo">✦ Lihat Demo</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <span class="section-label">Fitur Lengkap</span>
+    <h2 class="section-title">Semua yang Kamu <span style="color:var(--gold-light)">Butuhkan</span></h2>
+    <p class="section-sub">Undangan digitalmu hadir dengan fitur canggih yang membuat momen spesialmu semakin berkesan.</p>
+
+    <div class="features-grid">
+
+      <div class="feature-card reveal">
+        <span class="feature-icon">⏱️</span>
+        <h3 class="feature-title">Countdown Timer</h3>
+        <p class="feature-desc">Hitung mundur otomatis menuju hari H. Membuat tamu semakin bersemangat menantikan momenmu.</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">🖼️</span>
+        <h3 class="feature-title">Galeri Foto</h3>
+        <p class="feature-desc">Tampilkan foto-foto terbaikmu dalam galeri elegan. Mendukung hingga 30 foto per undangan.</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">🎵</span>
+        <h3 class="feature-title">Musik Latar</h3>
+        <p class="feature-desc">Tambahkan lagu favorit sebagai musik latar undangan. Ciptakan suasana yang lebih personal dan berkesan.</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-3">
+        <span class="feature-icon">📋</span>
+        <h3 class="feature-title">RSVP Digital</h3>
+        <p class="feature-desc">Konfirmasi kehadiran tamu secara digital. Data tersimpan otomatis dan bisa diunduh kapan saja.</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">🔗</span>
+        <h3 class="feature-title">Share Link</h3>
+        <p class="feature-desc">Bagikan undangan via WhatsApp, Instagram, atau link langsung. Mudah, cepat, dan menjangkau semua tamu.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <span class="section-label">Paket Harga</span>
+    <h2 class="section-title">Harga <span style="color:var(--gold-light)">Terjangkau</span></h2>
+    <p class="section-sub">Mulai gratis, upgrade kapan saja. Tanpa biaya tersembunyi.</p>
+
+    <div class="pricing-grid">
+
+      <!-- FREE -->
+      <div class="price-card reveal">
+        <div class="price-plan">Gratis</div>
+        <div class="price-amount"><sup>Rp</sup>0</div>
+        <div class="price-period">selamanya</div>
+        <ul class="price-features">
+          <li><span class="check">✓</span> 1 template dasar</li>
+          <li><span class="check">✓</span> Countdown timer</li>
+          <li><span class="check">✓</span> Share link</li>
+          <li><span class="check">✓</span> RSVP sederhana</li>
+          <li class="disabled"><span class="cross">✕</span> Galeri foto</li>
+          <li class="disabled"><span class="cross">✕</span> Musik latar</li>
+          <li class="disabled"><span class="cross">✕</span> Domain kustom</li>
+          <li class="disabled"><span class="cross">✕</span> Hapus branding Sikobokan</li>
+        </ul>
+        <a href="https://wa.me/6281234567890?text=Halo+Sikobokan" class="btn-plan btn-plan-outline" target="_blank" rel="noopener">Mulai Gratis</a>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="price-card featured reveal reveal-delay-1">
+        <span class="popular-tag">Terpopuler</span>
+        <div class="price-plan">Premium</div>
+        <div class="price-amount"><sup>Rp</sup>149<span style="font-size:1.1rem;font-family:'Inter',sans-serif;font-weight:600;">rb</span></div>
+        <div class="price-period">per undangan, aktif 6 bulan</div>
+        <ul class="price-features">
+          <li><span class="check">✓</span> Semua template premium</li>
+          <li><span class="check">✓</span> Countdown timer</li>
+          <li><span class="check">✓</span> Share link</li>
+          <li><span class="check">✓</span> RSVP lengkap + ekspor</li>
+          <li><span class="check">✓</span> Galeri foto (30 foto)</li>
+          <li><span class="check">✓</span> Musik latar kustom</li>
+          <li class="disabled"><span class="cross">✕</span> Domain kustom</li>
+          <li><span class="check">✓</span> Hapus branding Sikobokan</li>
+        </ul>
+        <a href="https://wa.me/6281234567890?text=Halo+Sikobokan,+saya+mau+paket+Premium" class="btn-plan btn-plan-gold" target="_blank" rel="noopener">Pilih Premium</a>
+      </div>
+
+      <!-- VIP -->
+      <div class="price-card reveal reveal-delay-2">
+        <div class="price-plan">VIP</div>
+        <div class="price-amount"><sup>Rp</sup>299<span style="font-size:1.1rem;font-family:'Inter',sans-serif;font-weight:600;">rb</span></div>
+        <div class="price-period">per undangan, aktif 12 bulan</div>
+        <ul class="price-features">
+          <li><span class="check">✓</span> Semua template eksklusif</li>
+          <li><span class="check">✓</span> Countdown timer</li>
+          <li><span class="check">✓</span> Share link prioritas</li>
+          <li><span class="check">✓</span> RSVP lengkap + ekspor</li>
+          <li><span class="check">✓</span> Galeri foto tak terbatas</li>
+          <li><span class="check">✓</span> Musik latar kustom</li>
+          <li><span class="check">✓</span> Domain kustom</li>
+          <li><span class="check">✓</span> Tanpa branding Sikobokan</li>
+        </ul>
+        <a href="https://wa.me/6281234567890?text=Halo+Sikobokan,+saya+mau+paket+VIP" class="btn-plan btn-plan-outline" target="_blank" rel="noopener">Pilih VIP</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <span class="section-label">Kata Mereka</span>
+    <h2 class="section-title">Dipercaya <span style="color:var(--gold-light)">Ribuan Keluarga</span></h2>
+    <p class="section-sub">Bukan sekadar undangan — sebuah kenangan digital yang tersimpan seumur hidup.</p>
+
+    <div class="testi-grid">
+
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Sikobokan bikin undangan pernikahan kami jadi luar biasa! Tamu pada kagum karena undangannya elegan banget. Prosesnya cepat, tim support-nya juga sangat responsif. Highly recommended!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar av1">👰</div>
+          <div>
+            <div class="testi-name">Rizki &amp; Amelia Putri</div>
+            <div class="testi-detail">Pernikahan, Bandung • Premium Plan</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Ulang tahun anak saya jadi berkesan banget karena undangan digitalnya keren. Tampilannya colorful, ada countdown-nya, dan mudah dibagikan ke semua keluarga lewat WhatsApp. Terima kasih Sikobokan!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar av2">🎂</div>
+          <div>
+            <div class="testi-name">Siti Rahmawati</div>
+            <div class="testi-detail">Ulang Tahun, Surabaya • Premium Plan</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Khitanan putra kami makin berkesan dengan undangan digital dari Sikobokan. Desainnya islami, bersih, dan fitur RSVPnya sangat membantu kami menghitung tamu yang hadir. Mantap!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar av3">🌙</div>
+          <div>
+            <div class="testi-name">H. Ahmad Fauzan</div>
+            <div class="testi-detail">Khitanan, Jakarta • VIP Plan</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <span class="section-label">Mulai Sekarang</span>
+  <h2 class="section-title">Siap Buat Undangan<br><span style="color:var(--gold-light)">Digitalmu?</span></h2>
+  <p class="section-sub" style="margin-bottom:36px">Chat kami sekarang, undanganmu siap dalam 24 jam. Gratis konsultasi!</p>
+  <a href="https://wa.me/6281234567890?text=Halo+Sikobokan,+saya+ingin+membuat+undangan+digital" class="wa-btn" target="_blank" rel="noopener">
+    <span class="wa-icon">💬</span>
+    Chat WhatsApp Sekarang
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Sikobokan</a>
+      <p class="footer-tagline">Platform undangan digital terpercaya untuk momen spesial Anda. Elegan, mudah, dan berkesan.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Menu</h4>
+      <ul>
+        <li><a href="#templates">Template</a></li>
+        <li><a href="#features">Fitur</a></li>
+        <li><a href="#pricing">Harga</a></li>
+        <li><a href="#testimonials">Testimoni</a></li>
+        <li><a href="https://wa.me/6281234567890?text=Halo+Sikobokan" target="_blank" rel="noopener">Kontak</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Sikobokan. Hak cipta dilindungi.</p>
+    <p>Dibuat dengan <span class="footer-love">♥</span> untuk momen spesial Indonesia</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Smooth nav active state
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold-light)' : '';
+    });
+  }, { passive: true });
+</script>
+
+</body>
+</html>
